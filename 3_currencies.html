@@ -1,0 +1,94 @@
+<html><head>
+<title>Data dictionary: C:\Education\otus\DB\W03\otus_rdbms_module1_dbdoc\3_currencies</title>
+<style>
+    td,th {
+      text-align:center;
+      vertical-align:middle;
+    }
+    table {
+      border-collapse: collapse;
+    }
+    caption, th, td {
+      padding: .2em .8em;
+      border: 1px solid #fff;
+    }
+    caption {
+      background: #dbb768;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    th {
+      font-weight: bold;
+      background: #f3ce7d;
+    }
+    td {
+      background: #ffea97;
+    }
+    </style>
+    </head>
+    <body>
+<img src='C:\Education\otus\DB\W03\otus_rdbms_module1_dbdoc\3_currencies.png'>
+<table><caption>Table: currencies - Словарь валют</caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>id_currency</td><td>SMALLINT(3)</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td>PK INT AI NN UN</td></tr><tr><td>currency_code</td><td>VARCHAR(3)</td><td>No</td><td>No</td><td>No</td><td></td><td>Трёхбуквенный код валюты по iso такому-то</td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`id_currency`']</td><td>PRIMARY</td><td></td></tr></table></br><table><caption>Index: currency_code_UNIQUE</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>currency_code_UNIQUE</td><td>['`currency_code`']</td><td>UNIQUE</td><td></td></tr></table></br></table></br><table><caption>Table: currencies_rates - Обменные курсы валют
+Для пересчёта цен на дату по парам
+При отсутствии пары - работаем по кросс-курсу через доллар, евро и т.п. по алгоритму приложения</caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>id_currencies_rate</td><td>BIGINT(20)</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td>PK INT AI NN UN</td></tr><tr><td>rate_date</td><td>DATE</td><td>No</td><td>No</td><td>No</td><td></td><td>Дата котировки</td></tr><tr><td>currency_from</td><td>SMALLINT(3)</td><td>No</td><td>No</td><td>Yes</td><td></td><td>FK Валюта один</td></tr><tr><td>currency_to</td><td>SMALLINT(3)</td><td>No</td><td>No</td><td>Yes</td><td></td><td>FK Валюта два</td></tr><tr><td>rate</td><td>DOUBLE</td><td>No</td><td>No</td><td>No</td><td></td><td>Курс</td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`id_currencies_rate`']</td><td>PRIMARY</td><td></td></tr></table></br><table><caption>Index: currency_from_idx</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>currency_from_idx</td><td>['`currency_from`']</td><td>INDEX</td><td></td></tr></table></br><table><caption>Index: currency_to_idx</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>currency_to_idx</td><td>['`currency_to`']</td><td>INDEX</td><td></td></tr></table></br><table><caption>Index: date_c1_c2</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>date_c1_c2</td><td>['`rate_date`', '`currency_from`', '`currency_to`']</td><td>UNIQUE</td><td></td></tr></table></br></table></br>
+</body></html>

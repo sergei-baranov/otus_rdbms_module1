@@ -1,0 +1,132 @@
+<html><head>
+<title>Data dictionary: C:\Education\otus\DB\W03\otus_rdbms_module1_dbdoc\5_market</title>
+<style>
+    td,th {
+      text-align:center;
+      vertical-align:middle;
+    }
+    table {
+      border-collapse: collapse;
+    }
+    caption, th, td {
+      padding: .2em .8em;
+      border: 1px solid #fff;
+    }
+    caption {
+      background: #dbb768;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    th {
+      font-weight: bold;
+      background: #f3ce7d;
+    }
+    td {
+      background: #ffea97;
+    }
+    </style>
+    </head>
+    <body>
+<img src='C:\Education\otus\DB\W03\otus_rdbms_module1_dbdoc\5_market.png'>
+<table><caption>Table: quotations_ts - Архив торговых предложений
+(архив биржевых котировок облигаций)</caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>id_quotation_ts</td><td>BIGINT(20)</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td>INT AI NN UN</td></tr><tr><td>bond_id</td><td>BIGINT(8)</td><td>Yes</td><td>Yes</td><td>Yes</td><td></td><td>Id товара (облигации) - FK на bonds</td></tr><tr><td>provider_id</td><td>BIGINT(4)</td><td>Yes</td><td>Yes</td><td>Yes</td><td></td><td>Id поставщика (биржи) - FK на providers</td></tr><tr><td>date_quote</td><td>DATE</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td>Дата котировки</td></tr><tr><td>price_bid</td><td>DOUBLE</td><td>No</td><td>No</td><td>No</td><td></td><td></td></tr><tr><td>price_ask</td><td>DOUBLE</td><td>No</td><td>No</td><td>No</td><td></td><td></td></tr><tr><td>price_indicative</td><td>DOUBLE</td><td>No</td><td>No</td><td>No</td><td></td><td></td></tr><tr><td>yield_indicative</td><td>DOUBLE</td><td>No</td><td>No</td><td>No</td><td></td><td></td></tr></table></br><table><caption>Index: quote_uniq</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>quote_uniq</td><td>['`bond_id`', '`provider_id`', '`date_quote`']</td><td>UNIQUE</td><td></td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`id_quotation_ts`', '`bond_id`', '`provider_id`', '`date_quote`']</td><td>PRIMARY</td><td></td></tr></table></br><table><caption>Index: provider_idx</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>provider_idx</td><td>['`provider_id`']</td><td>INDEX</td><td></td></tr></table></br></table></br><table><caption>Table: bonds - </caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>id_bond</td><td>BIGINT(8)</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td>PK INT AI NN UN</td></tr><tr><td>isin</td><td>VARCHAR(32)</td><td>No</td><td>No</td><td>No</td><td></td><td>Уникальный строковый идентификатор</td></tr><tr><td>producer_id</td><td>BIGINT(20)</td><td>No</td><td>No</td><td>Yes</td><td></td><td>FK на производителя (эмитент выпуска облигаций)</td></tr><tr><td>nominal_price</td><td>DOUBLE</td><td>No</td><td>No</td><td>No</td><td></td><td>номинальная цена</td></tr><tr><td>lifecycle_phase</td><td>SMALLINT(2)</td><td>No</td><td>No</td><td>Yes</td><td></td><td>FK на справочник стадий жизненного цикла</td></tr><tr><td>currency_id</td><td>SMALLINT(2)</td><td>No</td><td>No</td><td>Yes</td><td></td><td>FK валюта выпуска</td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`id_bond`']</td><td>PRIMARY</td><td></td></tr></table></br><table><caption>Index: isin_UNIQUE</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>isin_UNIQUE</td><td>['`isin`']</td><td>UNIQUE</td><td></td></tr></table></br><table><caption>Index: producer_idx</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>producer_idx</td><td>['`producer_id`']</td><td>INDEX</td><td></td></tr></table></br><table><caption>Index: currency_idx</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>currency_idx</td><td>['`currency_id`']</td><td>INDEX</td><td></td></tr></table></br><table><caption>Index: lcphase_idx</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>lcphase_idx</td><td>['`lifecycle_phase`']</td><td>INDEX</td><td></td></tr></table></br></table></br><table><caption>Table: providers - Поставщики. Справочник поставщиков для торговых позиций в продаже.
+Для бухгалтерии или даже для покупателя, если ему важен поставщик, а не только производитель.
+Так же будет фактором разветвления одного товара каталога на несколько торговых позиций.</caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>id_provider</td><td>BIGINT(4)</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td>PK INT AI NN UN</td></tr><tr><td>organization_id</td><td>BIGINT(20)</td><td>Yes</td><td>No</td><td>Yes</td><td></td><td>FK на таблицу организаций</td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`id_provider`']</td><td>PRIMARY</td><td></td></tr></table></br><table><caption>Index: provider_organization_idx</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>provider_organization_idx</td><td>['`organization_id`']</td><td>UNIQUE</td><td></td></tr></table></br></table></br>
+</body></html>

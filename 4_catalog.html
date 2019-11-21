@@ -1,0 +1,259 @@
+<html><head>
+<title>Data dictionary: C:\Education\otus\DB\W03\otus_rdbms_module1_dbdoc\4_catalog</title>
+<style>
+    td,th {
+      text-align:center;
+      vertical-align:middle;
+    }
+    table {
+      border-collapse: collapse;
+    }
+    caption, th, td {
+      padding: .2em .8em;
+      border: 1px solid #fff;
+    }
+    caption {
+      background: #dbb768;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    th {
+      font-weight: bold;
+      background: #f3ce7d;
+    }
+    td {
+      background: #ffea97;
+    }
+    </style>
+    </head>
+    <body>
+<img src='C:\Education\otus\DB\W03\otus_rdbms_module1_dbdoc\4_catalog.png'>
+<table><caption>Table: bonds_lyfecycle_phases - Справочник стадий жизненного цикла облигаций - размещение, в обращении, погашена, дефолт и т.п.</caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>id_lc_phases</td><td>SMALLINT(2)</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td>PK INT AI NN UN</td></tr><tr><td>name</td><td>VARCHAR(255)</td><td>No</td><td>No</td><td>No</td><td></td><td>Название стадии. Без локализации.</td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`id_lc_phases`']</td><td>PRIMARY</td><td></td></tr></table></br><table><caption>Index: name_UNIQUE</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>name_UNIQUE</td><td>['`name`']</td><td>UNIQUE</td><td></td></tr></table></br></table></br><table><caption>Table: bonds - </caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>id_bond</td><td>BIGINT(8)</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td>PK INT AI NN UN</td></tr><tr><td>isin</td><td>VARCHAR(32)</td><td>No</td><td>No</td><td>No</td><td></td><td>Уникальный строковый идентификатор</td></tr><tr><td>producer_id</td><td>BIGINT(20)</td><td>No</td><td>No</td><td>Yes</td><td></td><td>FK на производителя (эмитент выпуска облигаций)</td></tr><tr><td>nominal_price</td><td>DOUBLE</td><td>No</td><td>No</td><td>No</td><td></td><td>номинальная цена</td></tr><tr><td>lifecycle_phase</td><td>SMALLINT(2)</td><td>No</td><td>No</td><td>Yes</td><td></td><td>FK на справочник стадий жизненного цикла</td></tr><tr><td>currency_id</td><td>SMALLINT(2)</td><td>No</td><td>No</td><td>Yes</td><td></td><td>FK валюта выпуска</td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`id_bond`']</td><td>PRIMARY</td><td></td></tr></table></br><table><caption>Index: isin_UNIQUE</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>isin_UNIQUE</td><td>['`isin`']</td><td>UNIQUE</td><td></td></tr></table></br><table><caption>Index: producer_idx</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>producer_idx</td><td>['`producer_id`']</td><td>INDEX</td><td></td></tr></table></br><table><caption>Index: currency_idx</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>currency_idx</td><td>['`currency_id`']</td><td>INDEX</td><td></td></tr></table></br><table><caption>Index: lcphase_idx</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>lcphase_idx</td><td>['`lifecycle_phase`']</td><td>INDEX</td><td></td></tr></table></br></table></br><table><caption>Table: bonds_lc_dates - Даты жизненного цикла облигации</caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>bond_id</td><td>BIGINT(8)</td><td>Yes</td><td>Yes</td><td>Yes</td><td></td><td>PK - FK на bonds</td></tr><tr><td>date_start_pacing</td><td>DATE</td><td>No</td><td>No</td><td>No</td><td></td><td>Дата начала размещения</td></tr><tr><td>date_end_placing</td><td>DATE</td><td>No</td><td>No</td><td>No</td><td></td><td>Дата окончания размещения</td></tr><tr><td>date_maturity</td><td>DATE</td><td>No</td><td>No</td><td>No</td><td></td><td>Дата погашения</td></tr><tr><td>date_redemption</td><td>DATE</td><td>No</td><td>No</td><td>No</td><td></td><td>Дата досрочного погашения</td></tr><tr><td>date_start_circulation</td><td>DATE</td><td>No</td><td>No</td><td>No</td><td></td><td>Дата начала обращения</td></tr></table></br><table><caption>Index: bond_id_UNIQUE</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>bond_id_UNIQUE</td><td>['`bond_id`']</td><td>UNIQUE</td><td></td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`bond_id`']</td><td>PRIMARY</td><td></td></tr></table></br></table></br><table><caption>Table: currencies - Словарь валют</caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>id_currency</td><td>SMALLINT(3)</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td>PK INT AI NN UN</td></tr><tr><td>currency_code</td><td>VARCHAR(3)</td><td>No</td><td>No</td><td>No</td><td></td><td>Трёхбуквенный код валюты по iso такому-то</td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`id_currency`']</td><td>PRIMARY</td><td></td></tr></table></br><table><caption>Index: currency_code_UNIQUE</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>currency_code_UNIQUE</td><td>['`currency_code`']</td><td>UNIQUE</td><td></td></tr></table></br></table></br><table><caption>Table: producers - Производители. Справочник производителей для товаров каталога.
+Можно использовать для построения витрин товаров типа "все товары производителя такого-то".</caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>id_producer</td><td>BIGINT(20)</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td>PK INT AI NN UN</td></tr><tr><td>organization_id</td><td>BIGINT(20)</td><td>Yes</td><td>No</td><td>Yes</td><td></td><td>FK на таблицу организаций</td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`id_producer`']</td><td>PRIMARY</td><td></td></tr></table></br><table><caption>Index: producer_organization_idx</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>producer_organization_idx</td><td>['`organization_id`']</td><td>UNIQUE</td><td></td></tr></table></br></table></br><table><caption>Table: bonds_classifier_dictionaries - Все словари для классификатора бондов одной простынёй</caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>id_classifier_dictionary</td><td>BIGINT(20)</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td>PK INT AI NN UN</td></tr><tr><td>dct_name</td><td>VARCHAR(45)</td><td>No</td><td>No</td><td>No</td><td></td><td>Название словаря</td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`id_classifier_dictionary`']</td><td>PRIMARY</td><td></td></tr></table></br><table><caption>Index: dct_name_UNIQUE</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>dct_name_UNIQUE</td><td>['`dct_name`']</td><td>UNIQUE</td><td></td></tr></table></br></table></br><table><caption>Table: bonds_classifier_dct_items - </caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>id_classifier_item</td><td>BIGINT(20)</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td>Позиция в словаре</td></tr><tr><td>dictionary_id</td><td>BIGINT(20)</td><td>No</td><td>No</td><td>Yes</td><td></td><td>FK ссылка на словарь</td></tr><tr><td>item_int_val</td><td>SMALLINT(3)</td><td>No</td><td>No</td><td>No</td><td></td><td>Числовое (для выборки и связей) значение позиции в словаре</td></tr><tr><td>item_name</td><td>VARCHAR(45)</td><td>No</td><td>No</td><td>No</td><td></td><td>Строковое (визуализируемое) значение позиции в словаре</td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`id_classifier_item`']</td><td>PRIMARY</td><td></td></tr></table></br><table><caption>Index: item_uniq</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>item_uniq</td><td>['`dictionary_id`', '`item_int_val`']</td><td>UNIQUE</td><td></td></tr></table></br><table><caption>Index: item_uniq2</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>item_uniq2</td><td>['`dictionary_id`', '`item_name`']</td><td>UNIQUE</td><td></td></tr></table></br></table></br><table><caption>Table: bonds_classifier - Вся классификация облигаций (товара каталога) по классификационным словарям одной простынёй</caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>id_bonds_classifier</td><td>BIGINT(20)</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td>явный PK INT UN AI для связей</td></tr><tr><td>bond_id</td><td>BIGINT(20)</td><td>No</td><td>No</td><td>Yes</td><td></td><td>FK на позицию каталога (облигация (bond))</td></tr><tr><td>dct_id</td><td>BIGINT(20)</td><td>No</td><td>No</td><td>Yes</td><td></td><td>FK на классификационный словарь</td></tr><tr><td>dct_item_id</td><td>BIGINT(20)</td><td>No</td><td>No</td><td>Yes</td><td></td><td>FK на позицию в словаре (значение)</td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`id_bonds_classifier`']</td><td>PRIMARY</td><td></td></tr></table></br><table><caption>Index: bond_dct</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>bond_dct</td><td>['`bond_id`', '`dct_id`']</td><td>UNIQUE</td><td></td></tr></table></br><table><caption>Index: dct_idx</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>dct_idx</td><td>['`dct_id`']</td><td>INDEX</td><td></td></tr></table></br><table><caption>Index: item_idx</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>item_idx</td><td>['`dct_item_id`']</td><td>INDEX</td><td></td></tr></table></br></table></br>
+</body></html>

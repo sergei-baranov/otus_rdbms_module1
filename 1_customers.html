@@ -1,0 +1,403 @@
+<html><head>
+<title>Data dictionary: C:\Education\otus\DB\W03\otus_rdbms_module1_dbdoc\1_customers</title>
+<style>
+    td,th {
+      text-align:center;
+      vertical-align:middle;
+    }
+    table {
+      border-collapse: collapse;
+    }
+    caption, th, td {
+      padding: .2em .8em;
+      border: 1px solid #fff;
+    }
+    caption {
+      background: #dbb768;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    th {
+      font-weight: bold;
+      background: #f3ce7d;
+    }
+    td {
+      background: #ffea97;
+    }
+    </style>
+    </head>
+    <body>
+<img src='C:\Education\otus\DB\W03\otus_rdbms_module1_dbdoc\1_customers.png'>
+<table><caption>Table: some_customers_old - </caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>title</td><td>VARCHAR(64)</td><td>No</td><td>No</td><td>No</td><td>NULL</td><td></td></tr><tr><td>first_name</td><td>VARCHAR(128)</td><td>No</td><td>No</td><td>No</td><td>NULL</td><td></td></tr><tr><td>last_name</td><td>VARCHAR(128)</td><td>No</td><td>No</td><td>No</td><td>NULL</td><td></td></tr><tr><td>correspondence_language</td><td>VARCHAR(2)</td><td>No</td><td>No</td><td>No</td><td>NULL</td><td></td></tr><tr><td>birth_date</td><td>DATE</td><td>No</td><td>No</td><td>No</td><td>NULL</td><td></td></tr><tr><td>gender</td><td>VARCHAR(7)</td><td>No</td><td>No</td><td>No</td><td>NULL</td><td></td></tr><tr><td>marital_status</td><td>VARCHAR(7)</td><td>No</td><td>No</td><td>No</td><td>NULL</td><td></td></tr><tr><td>country</td><td>VARCHAR(2)</td><td>No</td><td>No</td><td>No</td><td>NULL</td><td></td></tr><tr><td>postal_code</td><td>VARCHAR(32)</td><td>No</td><td>No</td><td>No</td><td>NULL</td><td></td></tr><tr><td>region</td><td>VARCHAR(255)</td><td>No</td><td>No</td><td>No</td><td>NULL</td><td></td></tr><tr><td>city</td><td>VARCHAR(255)</td><td>No</td><td>No</td><td>No</td><td>NULL</td><td></td></tr><tr><td>street</td><td>VARCHAR(255)</td><td>No</td><td>No</td><td>No</td><td>NULL</td><td></td></tr><tr><td>building_number</td><td>VARCHAR(32)</td><td>No</td><td>No</td><td>No</td><td>NULL</td><td></td></tr></table></br><table><caption>Table: customers - Таблица клиентов. Персона и адрес для связи (в юридическом смысле, а-ля прописка, текущий юрадрес персоны для официальной корреспонденции и т.п.).</caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>id_customer</td><td>BIGINT(20)</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td>PK INT AI NN UN</td></tr><tr><td>persons_id</td><td>BIGINT(20)</td><td>No</td><td>No</td><td>Yes</td><td></td><td>FK на персону</td></tr><tr><td>postal_address_id</td><td>BIGINT(20)</td><td>No</td><td>No</td><td>Yes</td><td></td><td>FK на адрес</td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`id_customer`']</td><td>PRIMARY</td><td></td></tr></table></br><table><caption>Index: person_id_UNIQUE</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>person_id_UNIQUE</td><td>['`persons_id`']</td><td>UNIQUE</td><td></td></tr></table></br><table><caption>Index: postal_addresses_idx</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>postal_addresses_idx</td><td>['`postal_address_id`']</td><td>INDEX</td><td></td></tr></table></br></table></br><table><caption>Table: persons - Персоны. Тезнический идентификатор - id_person, идентификатор из мира людей - email.
+Все люди, необходимые для системы, будут здесь; нечто вроде справочника людей.</caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>id_person</td><td>BIGINT(20)</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td>PK INT AI NN UN</td></tr><tr><td>email</td><td>VARCHAR(255)</td><td>Yes</td><td>No</td><td>No</td><td></td><td>Уникальное поле, строковый человекочитаемый интернационально понятный идентификатор</td></tr><tr><td>title</td><td>VARCHAR(64)</td><td>No</td><td>No</td><td>No</td><td></td><td>префикс-обращение, произвольная строка типа мисс, проф и т.п.</td></tr><tr><td>first_name</td><td>VARCHAR(128)</td><td>No</td><td>No</td><td>No</td><td></td><td>Имя</td></tr><tr><td>last_name</td><td>VARCHAR(128)</td><td>No</td><td>No</td><td>No</td><td></td><td>Фамилия или аналог</td></tr><tr><td>correspondence_language</td><td>SMALLINT(5)</td><td>No</td><td>No</td><td>Yes</td><td></td><td>Язык общения с клиентом, язык для юридических документов и т.п.</td></tr><tr><td>birth_date</td><td>DATE</td><td>No</td><td>No</td><td>No</td><td></td><td>Дата рождения</td></tr><tr><td>gender</td><td>SMALLINT(2)</td><td>No</td><td>No</td><td>Yes</td><td></td><td>Пол</td></tr><tr><td>marital_status</td><td>SMALLINT(2)</td><td>No</td><td>No</td><td>Yes</td><td></td><td>Семейное положение</td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`id_person`']</td><td>PRIMARY</td><td></td></tr></table></br><table><caption>Index: email_UNIQUE</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>email_UNIQUE</td><td>['`email`']</td><td>UNIQUE</td><td></td></tr></table></br><table><caption>Index: genders_idx</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>genders_idx</td><td>['`gender`']</td><td>INDEX</td><td></td></tr></table></br><table><caption>Index: langs_idx</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>langs_idx</td><td>['`correspondence_language`']</td><td>INDEX</td><td></td></tr></table></br><table><caption>Index: marital_statuses_idx</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>marital_statuses_idx</td><td>['`marital_status`']</td><td>INDEX</td><td></td></tr></table></br></table></br><table><caption>Table: postal_addresses - Почтовые адреса. Почтовое отделение плюс номер строения/помещения и т.п.
+Должна выступать в качестве "справочника" для всяких адресов - прописки людей, адресов доставки, юрадресов компаний и т.п.</caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>id_postal_address</td><td>BIGINT(20)</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td>PK INT AI NN UN</td></tr><tr><td>post_office_id</td><td>BIGINT(20)</td><td>No</td><td>No</td><td>Yes</td><td></td><td>FK на почтовое отделение (а оно соединяет индекс и улицу)</td></tr><tr><td>building_number</td><td>VARCHAR(255)</td><td>No</td><td>No</td><td>No</td><td></td><td>Номер дома. Строка, включающая идентификатор строения и помещения.</td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`id_postal_address`']</td><td>PRIMARY</td><td></td></tr></table></br><table><caption>Index: address</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>address</td><td>['`post_office_id`', '`building_number`']</td><td>UNIQUE</td><td></td></tr></table></br></table></br><table><caption>Table: genders - Справочник "Пол человека"</caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>id_gender</td><td>SMALLINT(2)</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td>PK INT AI NN UN</td></tr><tr><td>name</td><td>VARCHAR(255)</td><td>No</td><td>No</td><td>No</td><td></td><td>Название пола</td></tr><tr><td>code</td><td>VARCHAR(45)</td><td>No</td><td>No</td><td>No</td><td></td><td>Буквенный код пола</td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`id_gender`']</td><td>PRIMARY</td><td></td></tr></table></br><table><caption>Index: name_UNIQUE</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>name_UNIQUE</td><td>['`name`']</td><td>UNIQUE</td><td></td></tr></table></br><table><caption>Index: code_UNIQUE</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>code_UNIQUE</td><td>['`code`']</td><td>UNIQUE</td><td></td></tr></table></br></table></br><table><caption>Table: langs - Справочник языков</caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>id_lang</td><td>SMALLINT(5)</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td>PK INT AI NN UN</td></tr><tr><td>name</td><td>VARCHAR(255)</td><td>No</td><td>No</td><td>No</td><td></td><td>Название языка. Без локализации</td></tr><tr><td>code</td><td>VARCHAR(3)</td><td>No</td><td>No</td><td>No</td><td></td><td>Трёхбуквенный код языка по iso</td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`id_lang`']</td><td>PRIMARY</td><td></td></tr></table></br><table><caption>Index: name_UNIQUE</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>name_UNIQUE</td><td>['`name`']</td><td>UNIQUE</td><td></td></tr></table></br><table><caption>Index: code_UNIQUE</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>code_UNIQUE</td><td>['`code`']</td><td>UNIQUE</td><td></td></tr></table></br></table></br><table><caption>Table: countries - Справочник стран</caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>id_country</td><td>SMALLINT(5)</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td>PK INT AI NN UN</td></tr><tr><td>name</td><td>VARCHAR(255)</td><td>No</td><td>No</td><td>No</td><td></td><td>Название страны. Без локализации.</td></tr><tr><td>code</td><td>VARCHAR(5)</td><td>No</td><td>No</td><td>No</td><td></td><td>Код страны по iso такому-то</td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`id_country`']</td><td>PRIMARY</td><td></td></tr></table></br><table><caption>Index: name_UNIQUE</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>name_UNIQUE</td><td>['`name`']</td><td>UNIQUE</td><td></td></tr></table></br><table><caption>Index: code_UNIQUE</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>code_UNIQUE</td><td>['`code`']</td><td>UNIQUE</td><td></td></tr></table></br></table></br><table><caption>Table: cities - Справочник городов. Завязан на "родителя" - справочник регионов, а через него - на справочник стран.</caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>id_city</td><td>MEDIUMINT(8)</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td>PK INT AI NN UN</td></tr><tr><td>region_id</td><td>MEDIUMINT(8)</td><td>No</td><td>No</td><td>Yes</td><td></td><td>FK на регион</td></tr><tr><td>name</td><td>VARCHAR(255)</td><td>No</td><td>No</td><td>No</td><td></td><td>Название города. Без локализации.</td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`id_city`']</td><td>PRIMARY</td><td></td></tr></table></br><table><caption>Index: region_idx</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>region_idx</td><td>['`region_id`']</td><td>INDEX</td><td></td></tr></table></br></table></br><table><caption>Table: postal_codes - </caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>id_postal_code</td><td>BIGINT(20)</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td></td></tr><tr><td>city_id</td><td>MEDIUMINT(8)</td><td>No</td><td>No</td><td>Yes</td><td></td><td></td></tr><tr><td>code</td><td>VARCHAR(255)</td><td>No</td><td>No</td><td>No</td><td></td><td></td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`id_postal_code`']</td><td>PRIMARY</td><td></td></tr></table></br><table><caption>Index: city_idx</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>city_idx</td><td>['`city_id`']</td><td>INDEX</td><td></td></tr></table></br><table><caption>Index: city_code</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>city_code</td><td>['`city_id`', '`code`']</td><td>UNIQUE</td><td></td></tr></table></br></table></br><table><caption>Table: regions - Справочник регионов стран (провинции и т.п.) Завязан на "родителя" - справочник стран.</caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>id_region</td><td>MEDIUMINT(8)</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td>PK INT AI NN UN</td></tr><tr><td>country_id</td><td>SMALLINT(5)</td><td>No</td><td>No</td><td>Yes</td><td></td><td>FK на страну</td></tr><tr><td>name</td><td>VARCHAR(255)</td><td>No</td><td>No</td><td>No</td><td></td><td>Название региона. Без локализации.</td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`id_region`']</td><td>PRIMARY</td><td></td></tr></table></br><table><caption>Index: country_idx</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>country_idx</td><td>['`country_id`']</td><td>INDEX</td><td></td></tr></table></br><table><caption>Index: country_name</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>country_name</td><td>['`country_id`', '`name`']</td><td>UNIQUE</td><td></td></tr></table></br></table></br><table><caption>Table: streets - Справочник улиц городов мира. Завязан на города, через них на регионы, через них на страны.</caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>id_street</td><td>BIGINT(20)</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td>PK INT AI NN UN</td></tr><tr><td>city_id</td><td>MEDIUMINT(8)</td><td>No</td><td>No</td><td>Yes</td><td></td><td>FK на город</td></tr><tr><td>name</td><td>VARCHAR(255)</td><td>No</td><td>No</td><td>No</td><td></td><td>Название улицы. Без локализации.</td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`id_street`']</td><td>PRIMARY</td><td></td></tr></table></br><table><caption>Index: city_idx</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>city_idx</td><td>['`city_id`']</td><td>INDEX</td><td></td></tr></table></br><table><caption>Index: city_name</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>city_name</td><td>['`city_id`', '`name`']</td><td>UNIQUE</td><td></td></tr></table></br></table></br><table><caption>Table: marital_statuses - Справочник "Семейное положение"</caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>id_marital_status</td><td>SMALLINT(2)</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td>PK INT AI NN UN</td></tr><tr><td>name</td><td>VARCHAR(255)</td><td>No</td><td>No</td><td>No</td><td></td><td>Название семейного статуса. Без локализации.</td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`id_marital_status`']</td><td>PRIMARY</td><td></td></tr></table></br><table><caption>Index: name_UNIQUE</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>name_UNIQUE</td><td>['`name`']</td><td>UNIQUE</td><td></td></tr></table></br></table></br><table><caption>Table: post_offices - Почтовые отделения. Таблица-связка индексов и улиц "многие ко многим". Таблица выступает справочником для поля из таблицы почтовых адресов.</caption><tr><td colspan="7">Attributes</td></tr>
+        <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Not Null</th>
+        <th>PK</th>
+        <th>FK</th>
+        <th>Default</th>
+        <th>Comment</th>
+        </tr><tr><td>id_post_office</td><td>BIGINT(20)</td><td>Yes</td><td>Yes</td><td>No</td><td></td><td>PK INT AI NN UN</td></tr><tr><td>postal_code_id</td><td>BIGINT(20)</td><td>No</td><td>No</td><td>Yes</td><td></td><td>FK на почтовые индексы</td></tr><tr><td>street_id</td><td>BIGINT(20)</td><td>No</td><td>No</td><td>Yes</td><td></td><td>FK на улицы</td></tr><tr><td>name</td><td>VARCHAR(255)</td><td>No</td><td>No</td><td>No</td><td></td><td>Название почтового отделения. Без локализации.</td></tr></table></br><table><caption>Index: PRIMARY</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>PRIMARY</td><td>['`id_post_office`']</td><td>PRIMARY</td><td></td></tr></table></br><table><caption>Index: postal_code_idx</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>postal_code_idx</td><td>['`postal_code_id`']</td><td>INDEX</td><td></td></tr></table></br><table><caption>Index: street_idx</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>street_idx</td><td>['`street_id`']</td><td>INDEX</td><td></td></tr></table></br><table><caption>Index: zip_street_uniq</caption><tr><td colspan="4">Attributes</td></tr>
+                <tr>
+                <th>Name</th>
+                <th>Columns</th>
+                <th>Type</th>
+                <th>Description</th>
+                </tr>
+                <tr><td>zip_street_uniq</td><td>['`postal_code_id`', '`street_id`']</td><td>UNIQUE</td><td></td></tr></table></br></table></br>
+</body></html>
